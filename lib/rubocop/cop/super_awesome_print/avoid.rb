@@ -4,11 +4,11 @@ module RuboCop
   module Cop
     module SuperAwesomePrint
       class Avoid < Cop # rubocop:disable Style/Documentation
-        MSG = 'Avoid `sap` in production'.freeze
+        MSG = 'Avoid `sap` and `sapf` in production'.freeze
 
         def_node_matcher :sap?, <<-END
           (send nil
-            {:sap}
+            {:sap :sapf}
             ...)
         END
 
