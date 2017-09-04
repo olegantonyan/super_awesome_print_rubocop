@@ -27,7 +27,7 @@ require: 'super_awesome_print_rubocop'
 
 ## Usage
 
-Run `rubocop as usual`. It should fail if you have `sap` call in your code.
+Run `rubocop` as usual. It should fail if you have `sap` call in your code.
 
 ## Development
 
