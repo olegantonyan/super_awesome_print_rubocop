@@ -1,20 +1,18 @@
-require 'rubocop'
-
 module RuboCop
   module Cop
     module SuperAwesomePrint
-      class Avoid < Cop # rubocop:disable Style/Documentation
-        MSG = 'Avoid `sap` and `sapf` in production'.freeze
+      class Avoid < Base
+        MSG = 'Avoid `%<method>s` in production.'.freeze
+        RESTRICT_ON_SEND = %i[sap sapf].freeze
 
-        def_node_matcher :sap?, <<-END
-          (send nil
-            {:sap :sapf}
-            ...)
-        END
+        def_node_matcher :sap_call?, <<-PATTERN
+          (send {nil? self} {:sap :sapf} ...)
+        PATTERN
 
         def on_send(node)
-          return unless sap?(node)
-          add_offense(node, :expression, format(MSG, node.source))
+          return unless sap_call?(node)
+
+          add_offense(node, message: format(MSG, method: node.method_name))
         end
       end
     end

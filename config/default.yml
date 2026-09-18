@@ -1,0 +1,3 @@
+SuperAwesomePrint/Avoid:
+  Description: 'Checks for leftover `sap` and `sapf` debug calls.'
+  Enabled: true
